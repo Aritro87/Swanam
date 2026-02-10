@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Swanam 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Quicksand',sans-serif;
+  background:linear-gradient(180deg,#ffd1e8,#ffe6f2,#fff0f7);
+  text-align:center;
+  overflow-x:hidden;
+}
+
+.section{padding:20px;}
+
+h1{
+  font-family:'Pacifico',cursive;
+  color:#e91e63;
+  font-size:2.2rem;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  padding:15px;
+}
+
+.gallery img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  border-radius:16px;
+}
+
+.question-box{
+  background:#fff;
+  margin:20px;
+  padding:25px;
+  border-radius:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.question{
+  font-size:1.4rem;
+  color:#e91e63;
+  margin-bottom:20px;
+}
+
+.buttons{
+  display:flex;
+  justify-content:space-around;
+  gap:25px;
+}
+
+.btn{
+  font-size:1.3rem;
+  padding:18px 35px;
+  border:none;
+  border-radius:40px;
+  cursor:pointer;
+}
+
+.yes{
+  background:#ff4d88;
+  color:white;
+  box-shadow:0 0 15px rgba(255,77,136,0.6);
+  animation:glow 2s infinite;
+}
+
+.no{
+  background:#f2f2f2;
+  color:#777;
+}
+
+@keyframes glow{
+  0%{box-shadow:0 0 10px #ff7ab8;}
+  50%{box-shadow:0 0 25px #ff4d88;}
+  100%{box-shadow:0 0 10px #ff7ab8;}
+}
+
+#overlay{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:none;
+  z-index:999;
+}
+
+.firework, .kiss{
+  position:fixed;
+  pointer-events:none;
+  z-index:1000;
+}
+
+@keyframes explode{
+  0%{transform:scale(0);opacity:1;}
+  100%{transform:scale(2);opacity:0;}
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-120vh);opacity:0;}
+}
+
+.final-page{
+  display:none;
+  min-height:100vh;
+  background:linear-gradient(180deg,#ffd1e8,#ffe6f2,#fff0f7);
+  padding:30px;
+}
+
+.final-msg{
+  font-family:'Pacifico',cursive;
+  color:#e91e63;
+  font-size:1.8rem;
+  margin-top:40px;
+}
+
+.sub-msg{
+  font-size:1.2rem;
+  color:#ff4d88;
+  margin-top:20px;
+}
+
+.heart{
+  position:fixed;
+  font-size:28px;
+  animation:floatUp 8s linear;
+  z-index:9999;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC PLACEHOLDER -->
+<audio id="bgMusic" loop>
+  <source src="perfect.mp3" type="audio/mpeg">
+</audio>
+
+<div id="mainPage">
+  <div class="section">
+    <h1>Hey Swanam 💖</h1>
+  </div>
+
+  <!-- IMAGE PLACEHOLDERS -->
+  <div class="gallery">
+    <img src="chocolate.jpg">
+    <img src="travel.jpg">
+    <img src="fest.jpg">
+    <img src="teddy.jpg">
+    <img src="flower.jpg">
+    <img src="travel2.jpg">
+  </div>
+
+  <div class="question-box">
+    <div class="question">Will you be my Valentine? 💘</div>
+    <div class="buttons">
+      <button class="btn yes" onclick="yesClick()">Yes 💖</button>
+      <button class="btn no" id="noBtn" onclick="noClick()">No 🙈</button>
+    </div>
+  </div>
+</div>
+
+<div id="overlay"></div>
+
+<div class="final-page" id="finalPage">
+  <div class="final-msg">Swanam, you are my safest place, my happiest thought, and my forever dream 💖</div>
+  <div class="sub-msg">
+You make my world softer, brighter, kinder, and more beautiful just by existing ✨
+
+I love you more than words will ever be able to say 💞</div>
+
+</div>
+
+<script>
+const naughtyMsgs = [
+  "Naughty naughty 😝",
+  "Hehe... not so easy 🙈",
+  "Nice try, cutie 😏"
+];
+
+function noClick(){
+  const msg = naughtyMsgs[Math.floor(Math.random()*naughtyMsgs.length)];
+  alert(msg);
+  setTimeout(()=>{
+    const btn = document.getElementById('noBtn');
+    const x = Math.random()*(window.innerWidth-100);
+    const y = Math.random()*(window.innerHeight-100);
+    btn.style.position='fixed';
+    btn.style.left=x+'px';
+    btn.style.top=y+'px';
+  },500);
+}
+
+function yesClick(){
+  document.body.style.background="#000";
+  document.getElementById('overlay').style.display='block';
+
+  for(let i=0;i<25;i++){
+    const fw=document.createElement('div');
+    fw.className='firework';
+    fw.innerText='🎆';
+    fw.style.left=Math.random()*100+'vw';
+    fw.style.top=Math.random()*100+'vh';
+    fw.style.fontSize='40px';
+    fw.style.animation='explode 1.5s';
+    document.body.appendChild(fw);
+    setTimeout(()=>fw.remove(),1500);
+  }
+
+  const kissInterval=setInterval(()=>{
+    const k=document.createElement('div');
+    k.className='kiss';
+    k.innerText='😘';
+    k.style.left=Math.random()*100+'vw';
+    k.style.top='100vh';
+    k.style.fontSize='30px';
+    k.style.animation='floatUp 5s linear';
+    document.body.appendChild(k);
+    setTimeout(()=>k.remove(),5000);
+  },150);
+
+  setTimeout(()=>{
+    clearInterval(kissInterval);
+    document.getElementById('mainPage').style.display='none';
+    document.getElementById('overlay').style.display='none';
+    document.getElementById('finalPage').style.display='block';
+    document.getElementById('bgMusic').play();
+    startHearts();
+  },3500);
+}
+
+function startHearts(){
+  setInterval(()=>{
+    const h=document.createElement('div');
+    h.className='heart';
+    h.innerText='💖';
+    h.style.left=Math.random()*100+'vw';
+    h.style.bottom='-30px';
+    h.style.fontSize=(20+Math.random()*25)+'px';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+  },300);
+}
+</script>
+
+</body>
+</html>
